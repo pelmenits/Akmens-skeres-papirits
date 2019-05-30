@@ -14,19 +14,44 @@ function getComputerChoice() {
     return choices[randomNumber];
 }
 
+function convertToWord (letter) {
+    if (letter == "r") return "Rock";
+    if(letter == "p") return "Paper";
+    return "Scissors";
+}
+
 function win(userChoice,computerChoice) {
     userScore++;
     userScore_span.innerHTML = userScore;
     computerScore_span.innerHTML = computerScore;
-    result_p.innerHTML = userChoice + "beats" + computerChoice + "YOU WIN!";
+    const smallUserWord = "user".fontsize(3).sup();
+    const userChoice_div = document.getElementById(userChoice);
+    const smallComputerWord = "computer".fontsize(3).sup();
+    result_p.innerHTML = convertToWord(userChoice) + (smallUserWord) + "  beats " + convertToWord(computerChoice) + (smallComputerWord) + "  YOU WIN! ";
+    userChoice_div.classList.add("green-glow");
+    setTimeout(function() { userChoice_div.classList.remove("green-glow") }, 300);
 }
 
-function lose() {
-    console.log("USER LOSES");
+function lose(userChoice,computerChoice) {
+    computerScore++;
+    computerScore_span.innerHTML = computerScore;
+    userScore_span.innerHTML = userScore;   
+    const smallUserWord = "user".fontsize(3).sup();
+    const userChoice_div = document.getElementById(userChoice);
+    const smallComputerWord = "computer".fontsize(3).sup();
+    result_p.innerHTML = convertToWord(computerChoice) + (smallComputerWord) + "  loses to " + convertToWord(userChoice) + (smallUserWord) + "  YOU LOSE! ";
+    userChoice_div.classList.add("red-glow");
+    setTimeout(function() { userChoice_div.classList.remove("red-glow") }, 300);
 }
 
-function draw() {
-    console.log("ITS A DRAW");
+
+function draw(computerChoice,userChoice) {
+    const smallUserWord = "user".fontsize(3).sup();
+    const userChoice_div = document.getElementById(userChoice);
+    const smallComputerWord = "computer".fontsize(3).sup();
+    result_p.innerHTML = convertToWord(userChoice) + (smallUserWord) + "  equals " + convertToWord(computerChoice) + (smallComputerWord) + "  ITS A DRAW! "
+    userChoice_div.classList.add("gray-glow");
+    setTimeout(function() { userChoice_div.classList.remove("gray-glow") }, 300);
 }
 
 function game (userChoice) {
@@ -68,4 +93,3 @@ main();
 
 
 
-36:35
